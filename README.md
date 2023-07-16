@@ -8,7 +8,13 @@
     - TypeORM (PostgreSQL)
     - Swagger 
 
-# Запуск
+# Запуск через Docker
+
+```bash
+git clone https://github.com/a4elru/test-fullstack && cd test-fullstack && docker compose up -d
+```
+
+# Запуск вручную
 
 1. Клонировать репозиторий и установить зависимости для Backend.
 2. Настроить PostgreSQL, проверить опции подключения в *backend\\src\\config.ts*.

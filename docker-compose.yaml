@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  pg:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testfullstack
+  be:
+    build: backend/.
+    environment:
+      PG_HOST: pg
+    ports:
+      - 3333:3333
+    depends_on:
+      - pg

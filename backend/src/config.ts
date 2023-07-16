@@ -7,7 +7,7 @@ export const jwtConfig = {
 
 export const pgConfig = {
   synchronize: !PRODUCTION,
-  host: 'localhost',
+  host: process.env['PG_HOST'] || 'localhost',
   port: 5432,
   username: 'postgres',
   password: 'postgres',
