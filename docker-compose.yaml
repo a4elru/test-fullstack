@@ -14,3 +14,9 @@ services:
       - 3333:3333
     depends_on:
       - pg
+  fe:
+    build: frontend/.
+    ports:
+      - 3000:3000
+    depends_on:
+      - be
