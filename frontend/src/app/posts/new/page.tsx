@@ -2,16 +2,13 @@
 
 import Pane from "@/components/pane";
 import { Button, H2, Table, Td, Input, Textarea } from "@/components/pane-elements";
-import { useMe } from "@/hooks/me";
+import { useAuthRedirect } from "@/hooks/auth-redirect";
 import { addRequestLog } from "@/lib/request-log";
 import axios from "axios";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function EditPosts() {
-  const { meError } = useMe();
-  if (meError) {
-    redirect('/auth/me');
-  }
+  useAuthRedirect();
   const router = useRouter();
   const handleSubmit = async (event: any) => {
     event.preventDefault(); // todo: типизировать event

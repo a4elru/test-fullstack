@@ -19,9 +19,9 @@ const PLeft = styled.p`
   text-align: left;
 `
 
-export default function Post({ post, myUserId }: { post: IPost, myUserId?: number }) {
+export default function Post({ post }: { post: IPost }) {
   let links;
-  if (myUserId === post.creatorUserId) {
+  if (Number(localStorage.getItem('myUserId')) === post.creatorUserId) {
     const remove = `/posts/${post.id}/remove`;
     const edit = `/posts/${post.id}/edit`;
     links = (<> (<Link href={edit}>изменить</Link>, <Link href={remove}>удалить</Link>)</>);

@@ -3,18 +3,15 @@
 import Loading from "@/components/loading";
 import Pane from "@/components/pane";
 import { Button, H2, Table, Td, Input, Textarea } from "@/components/pane-elements";
-import { useMe } from "@/hooks/me";
+import { useAuthRedirect } from "@/hooks/auth-redirect";
 import { usePost } from "@/hooks/post";
 import { addRequestLog } from "@/lib/request-log";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 
 export default function EditPosts({ params }: { params: { id: string } }) {
-  const { me, meError } = useMe();
+  useAuthRedirect();
   const { post, postError } = usePost(params.id);
-  if (meError) {
-    redirect('/auth/me');
-  }
   const router = useRouter();
   const handleSubmit = async (event: any) => {
     event.preventDefault(); // todo: типизировать event
@@ -54,7 +51,7 @@ export default function EditPosts({ params }: { params: { id: string } }) {
     }
   }
   return (
-    ( post && !postError && me && !meError &&
+    ( post && !postError &&
     <Pane>
       <form onSubmit={ handleSubmit }>
         <H2>Редактировать пост</H2>
@@ -83,7 +80,7 @@ export default function EditPosts({ params }: { params: { id: string } }) {
     </Pane>
     )
     ||
-    (!postError && !meError && <Loading />)
+    (!postError && <Loading />)
     ||
     (<Pane><H2>Ошибка.</H2></Pane>)
   )

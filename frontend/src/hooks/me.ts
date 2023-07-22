@@ -17,12 +17,14 @@ export function useMe() {
         });
         addRequestLog(JSON.stringify(ar.data, null, ' '));
         if (ar.status === 200) {
+          localStorage.setItem('myUserId', String(ar.data.result.id));
           setMe(ar.data.result);
           setMeError(false);
         } else {
           throw new Error();
         }
       } catch (err) {
+        localStorage.removeItem('myUserId');
         setMeError(true);
       }
     }

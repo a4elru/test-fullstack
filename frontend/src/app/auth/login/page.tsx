@@ -2,17 +2,14 @@
 
 import Pane from "@/components/pane";
 import { Button, H2, Input, Table, Td } from "@/components/pane-elements";
-import { useMe } from "@/hooks/me";
+import { useAuthRedirect } from "@/hooks/auth-redirect";
 import { addRequestLog } from "@/lib/request-log";
 import axios from "axios";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Me() {
+  useAuthRedirect(true);
   const router = useRouter();
-  const { me, meError } = useMe();
-  if (me && !meError) {
-    redirect('/auth/me');
-  }
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const { target } = event;
